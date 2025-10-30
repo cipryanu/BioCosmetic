@@ -20,41 +20,51 @@ body {
 
 .products-container {
   padding: 50px;
+  padding-top: 120px; /* 🔥 spațiu suficient sub navbar */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-}
-
-.products-container,
-.admin-container,
-.details-container {
-  position: relative;
-  top: 70px;
+  justify-items: center;
 }
 
 .product-card {
   background-color: white;
   border: 2px solid var(--green);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 280px;
+  min-height: 380px; /* înălțime fixă pentru uniformizare */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  border-radius: 12px;
-  width: 20vw;
-  padding: 5px;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .product-card img {
   width: 100%;
-  height: 20vh;
+  height: 180px;
   object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  margin: 10px 0;
+  min-height: 100px; /* <– forțează zona textului să aibă aceeași înălțime */
 }
 
 .product-info h3 {
-  margin: 10px 0;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--green);
-  text-align: center;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  min-height: 40px; /* <– aliniere uniformă pentru titluri */
 }
 
 .price {
@@ -64,26 +74,27 @@ body {
   margin-bottom: 10px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-around;
-}
-
+.buttons a,
 .buttons button {
+  flex: 1; /* ambele ocupă spațiu egal */
+  text-align: center;
+  text-decoration: none;
   border: none;
-  padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: 16px;
   cursor: pointer;
   color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.buttons a:hover,
+.buttons button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 .details-btn {
   background-color: var(--red);
-  border: none;
-  padding: 8px 14px;
-  border-radius: 16px;
-  cursor: pointer;
-  color: white;
 }
 
 .cart-btn {
