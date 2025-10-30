@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autentificare / Înregistrare - Reshify</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="index.html">
+        <span class="logo-letter">
+          <i class="fa-solid fa-f fa-fade" style="color: #ffd43b"></i>reshify
+        </span>
+      </a>
+      <div class="nav-actions">
+        <a class="cart-link" href="cart.html">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Coș</span>
+          <div class="badge" id="cart-count">0</div>
+        </a>
+
+        <a href="admin.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Admin</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="auth-page">
+      <div class="auth-card">
+        <div class="auth-switch">
+          <button id="btn-signin" class="switch-btn active">
+            Autentificare
+          </button>
+          <button id="btn-signup" class="switch-btn">Înregistrare</button>
+        </div>
+
+        <div class="forms-wrapper">
+          <!-- SIGN IN -->
+          <form id="signin-form" class="auth-form" novalidate>
+            <h2>Autentificare</h2>
+
+            <label class="input-group">
+              <span class="label-text">Email</span>
+              <input
+                type="email"
+                id="signin-email"
+                placeholder="ex: nume@exemplu.com"
+                required
+              />
+            </label>
+
+            <label class="input-group">
+              <span class="label-text">Parolă</span>
+              <div class="password-row">
+                <input
+                  type="password"
+                  id="signin-password"
+                  placeholder="Parola"
+                  required
+                />
+                <button
+                  type="button"
+                  class="icon-btn toggle-pass"
+                  data-target="signin-password"
+                  aria-label="Arată/parolează"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-btn">Autentifică-te</button>
+              <a href="#" class="link-small">Am uitat parola</a>
+            </div>
+          </form>
+
+          <!-- SIGN UP -->
+          <form id="signup-form" class="auth-form hidden" novalidate>
+            <h2>Înregistrare</h2>
+
+            <label class="input-group">
+              <span class="label-text">Nume complet</span>
+              <input
+                type="text"
+                id="signup-name"
+                placeholder="Numele tău"
+                required
+              />
+            </label>
+
+            <label class="input-group">
+              <span class="label-text">Email</span>
+              <input
+                type="email"
+                id="signup-email"
+                placeholder="ex: nume@exemplu.com"
+                required
+              />
+            </label>
+
+            <label class="input-group">
+              <span class="label-text">Parolă</span>
+              <div class="password-row">
+                <input
+                  type="password"
+                  id="signup-password"
+                  placeholder="Parolă (minim 6 caractere)"
+                  minlength="6"
+                  required
+                />
+                <button
+                  type="button"
+                  class="icon-btn toggle-pass"
+                  data-target="signup-password"
+                  aria-label="Arată/parolează"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </label>
+
+            <label class="input-group">
+              <span class="label-text">Confirmă parola</span>
+              <div class="password-row">
+                <input
+                  type="password"
+                  id="signup-password-confirm"
+                  placeholder="Confirmă parola"
+                  minlength="6"
+                  required
+                />
+                <button
+                  type="button"
+                  class="icon-btn toggle-pass"
+                  data-target="signup-password-confirm"
+                  aria-label="Arată/parolează"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </label>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="terms" required />
+              <span>Accept termenii și condițiile</span>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-btn">Creează cont</button>
+              <button type="button" id="cancel-signup" class="secondary-btn">
+                Anulează
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div id="form-feedback" class="form-feedback" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <script>
+      // Toggle forms
+      const btnSignin = document.getElementById("btn-signin");
+      const btnSignup = document.getElementById("btn-signup");
+      const signinForm = document.getElementById("signin-form");
+      const signupForm = document.getElementById("signup-form");
+      const feedback = document.getElementById("form-feedback");
+
+      function showSignin() {
+        btnSignin.classList.add("active");
+        btnSignup.classList.remove("active");
+        signinForm.classList.remove("hidden");
+        signupForm.classList.add("hidden");
+        feedback.textContent = "";
+      }
+
+      function showSignup() {
+        btnSignup.classList.add("active");
+        btnSignin.classList.remove("active");
+        signupForm.classList.remove("hidden");
+        signinForm.classList.add("hidden");
+        feedback.textContent = "";
+      }
+
+      btnSignin.addEventListener("click", showSignin);
+      btnSignup.addEventListener("click", showSignup);
+      document
+        .getElementById("cancel-signup")
+        .addEventListener("click", showSignin);
+
+      // Toggle password visibility
+      document.querySelectorAll(".toggle-pass").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.dataset.target;
+          const input = document.getElementById(targetId);
+          if (!input) return;
+          if (input.type === "password") {
+            input.type = "text";
+            btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+          } else {
+            input.type = "password";
+            btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+          }
+        });
+      });
+
+      // Simple form handlers (simulare, nu trimite nicăieri)
+      signinForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("signin-email").value.trim();
+        const pwd = document.getElementById("signin-password").value;
+        if (!email || !pwd) {
+          feedback.textContent = "Completează toate câmpurile.";
+          feedback.classList.add("error");
+          return;
+        }
+        feedback.textContent =
+          "Autentificare simulată — datele ar fi trimise la server.";
+        feedback.classList.remove("error");
+        feedback.classList.add("success");
+
+        const credentials = {
+          email: email,
+          password: pwd,
+        };
+
+        fetch("https://68f374eafd14a9fcc428d7f5.mockapi.io/users")
+          .then((response) => response.json())
+          .then((users) => {
+            const isUserRegistered =
+              users.filter(
+                (user) =>
+                  user.email == credentials.email &&
+                  user.password == credentials.password
+              ).length > 0;
+
+            if (isUserRegistered) {
+              feedback.textContent = "User logat cu success!";
+            }
+          });
+      });
+
+      signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("signup-name").value.trim();
+        const email = document.getElementById("signup-email").value.trim();
+        const pwd = document.getElementById("signup-password").value;
+        const pwd2 = document.getElementById("signup-password-confirm").value;
+        const terms = document.getElementById("terms").checked;
+
+        if (!name || !email || !pwd || !pwd2) {
+          feedback.textContent = "Completează toate câmpurile.";
+          feedback.classList.add("error");
+          return;
+        }
+        if (pwd.length < 6) {
+          feedback.textContent =
+            "Parola trebuie să aibă cel puțin 6 caractere.";
+          feedback.classList.add("error");
+          return;
+        }
+        if (pwd !== pwd2) {
+          feedback.textContent = "Parolele nu coincid.";
+          feedback.classList.add("error");
+          return;
+        }
+        if (!terms) {
+          feedback.textContent = "Trebuie să accepți termenii și condițiile.";
+          feedback.classList.add("error");
+          return;
+        }
+
+        feedback.textContent =
+          "Înregistrare simulată — datele ar fi trimise la server.";
+        feedback.classList.remove("error");
+        feedback.classList.add("success");
+
+        const newUser = {
+          name: name,
+          email: email,
+          password: pwd,
+        };
+
+        fetch("https://68f374eafd14a9fcc428d7f5.mockapi.io/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newUser),
+        });
+        console.log(newUser);
+      });
+    </script>
+  </body>
+</html>
