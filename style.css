@@ -1,0 +1,566 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+CU:wght@100..400&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green: #8fc56f;
+  --yellow: #2c4b26;
+  --orange: #6a8e7f;
+  --red: #d8a48f;
+}
+
+body {
+  font-family: "Red Hat Display", sans-serif;
+  background-color: var(--yellow);
+  height: 100vh;
+}
+
+.products-container {
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.products-container,
+.admin-container,
+.details-container {
+  position: relative;
+  top: 70px;
+}
+
+.product-card {
+  background-color: white;
+  border: 2px solid var(--green);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  width: 20vw;
+  padding: 5px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 20vh;
+  object-fit: cover;
+}
+
+.product-info h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  color: var(--green);
+  text-align: center;
+}
+
+.price {
+  color: var(--red);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.details-btn {
+  background-color: var(--red);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.cart-btn {
+  background-color: var(--green);
+}
+
+.navbar {
+  background-color: var(--green);
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--yellow);
+}
+
+.fa-f {
+  width: 9px !important;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-actions a {
+  text-decoration: none;
+  color: var(--yellow);
+}
+
+.cart-link {
+  position: relative;
+}
+
+.badge {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -8px;
+  right: 30px;
+}
+
+#add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+#name,
+#price,
+#imageURL,
+#description,
+#add-or-edit-btn {
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+#description {
+  min-height: 50px;
+  resize: vertical;
+}
+
+#add-or-edit-btn {
+  background-color: var(--red);
+  color: white;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+#add-btn:hover {
+  opacity: 1;
+}
+
+#products-table {
+  width: 100%;
+  padding: 10px;
+}
+
+#products-table thead th,
+#products-table tbody td {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#products-table tbody tr td {
+  text-align: center;
+}
+
+.cell-img img {
+  height: 60px;
+  width: 60px;
+}
+
+/* ===== Extra styling pentru pagina de autentificare / înregistrare ===== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 20px 40px; /* ține cont de navbar fix */
+}
+
+/* Card central */
+.auth-card {
+  width: 420px;
+  max-width: calc(100% - 40px);
+  background: linear-gradient(180deg, #ffffff 0%, #fffefc 100%);
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+/* comutator */
+.auth-switch {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 6px;
+  border-radius: 12px;
+}
+
+.switch-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--green);
+}
+
+.switch-btn.active {
+  background: var(--green);
+  color: var(--yellow);
+  box-shadow: 0 6px 18px rgba(132, 153, 79, 0.18);
+}
+
+/* formă */
+.forms-wrapper {
+}
+
+.auth-form {
+  display: block;
+}
+
+.auth-form.hidden {
+  display: none;
+}
+
+.auth-form h2 {
+  color: var(--green);
+  margin-bottom: 12px;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* grup input */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.label-text {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* inputuri - folosesc stilul deja definit, completare doar mici ajustări */
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  outline: none;
+  font-size: 14px;
+  background: #fff;
+}
+
+.auth-form input:focus {
+  border-color: var(--green);
+  box-shadow: 0 6px 18px rgba(132, 153, 79, 0.06);
+}
+
+/* butoane */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.primary-btn {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.8);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* link mic */
+.link-small {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+}
+
+/* buton icon (ochi) */
+.icon-btn {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* rând pentru input + buton ochi */
+.password-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.password-row input {
+  flex: 1;
+}
+
+/* agree checkbox */
+.checkbox-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 6px 0 12px 0;
+  font-size: 14px;
+}
+
+/* feedback mesaj */
+.form-feedback {
+  margin-top: 12px;
+  font-size: 14px;
+  min-height: 20px;
+  text-align: center;
+}
+
+.form-feedback.error {
+  color: var(--red);
+}
+
+.form-feedback.success {
+  color: var(--green);
+}
+
+/* responsive */
+@media (max-width: 520px) {
+  .auth-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .links-small {
+    text-align: center;
+  }
+}
+
+/* ===== Stilizare coș de cumpărături (linie per produs) ===== */
+
+.cart-container {
+  padding: 80px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.card-cart {
+  background-color: #fff;
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.card-cart img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.card-cart span {
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  min-width: 80px;
+}
+
+.card-cart > span:nth-child(2) {
+  flex: 1;
+  text-align: left;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.card-cart div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-cart button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.card-cart button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.card-cart .decrease {
+  background-color: var(--orange);
+}
+
+.card-cart .increase {
+  background-color: var(--green);
+}
+
+.card-cart .delete {
+  background-color: var(--red);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.card-cart .delete:hover {
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-cart {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 14px;
+  }
+  .card-cart img {
+    margin-bottom: 6px;
+  }
+  .card-cart span {
+    min-width: auto;
+  }
+}
+
+/* ===== Stilizare total coș ===== */
+
+.total-price-container {
+  position: sticky; /* rămâne vizibil când derulezi */
+  top: 70px; /* ține cont de navbar */
+  background-color: white;
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 15px 25px;
+  width: 60%;
+  max-width: 800px;
+  margin: 90px auto 20px auto; /* distanță sub navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.total-price-container h2 {
+  font-size: 20px;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.total-price-container span {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--red);
+}
+
+/* Buton pentru finalizare comandă (opțional) */
+.checkout-btn {
+  background-color: var(--green);
+  color: var(--yellow);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .total-price-container {
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    text-align: center;
+    padding: 12px 16px;
+  }
+  .total-price-container h2,
+  .total-price-container span {
+    font-size: 16px;
+  }
+}
