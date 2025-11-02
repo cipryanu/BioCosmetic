@@ -157,7 +157,7 @@ function attachAddToCartListener(product) {
  */
 function showToast(product, quantity) {
   const toast = document.getElementById("toast");
-  
+
   toast.innerHTML = `
     <img src="${product.imageURL}" alt="${product.name}" class="toast-image" />
     <div class="toast-content">
@@ -166,7 +166,7 @@ function showToast(product, quantity) {
       <span class="toast-message">Adăugat în coș ✓</span>
     </div>
   `;
-  
+
   toast.classList.add("show");
 
   // Ascunde notificarea după 3 secunde
