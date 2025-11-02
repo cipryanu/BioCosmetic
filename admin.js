@@ -5,122 +5,113 @@ const URL = "https://69030bc3d0f10a340b225a62.mockapi.io/products";
 const tableBody = document.querySelector("#products-table tbody");
 const addOrEditBtn = document.querySelector("#add-or-edit-btn");
 let isEditMode = false;
-let productId;
+let productId = null;
 
 const nameInput = document.getElementById("name");
 const priceInput = document.getElementById("price");
 const imageURLInput = document.getElementById("imageURL");
 const descriptionInput = document.getElementById("description");
 
+// ========== RENDER TABLE ==========
 function renderTable() {
   fetch(URL)
     .then((response) => response.json())
     .then((products) => {
       tableBody.innerHTML = products
         .map(
-          (product, index) =>
-            `
-            <tr data-id=${product.id}>
-               <td>${index + 1}</td>
-               <td class="cell-img">
-                  <img src=${product.imageURL} />
-               </td>
-               <td class="cell-name">
-                  ${product.name}
-               </td>
-               <td class="cell-price">
-                  ${product.price}
-               </td>
-               <td>
-                  <div class="actions">
-                     <button class="btn edit" data-action="edit">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                     </button>
-                     <button class="btn delete" data-action="delete">
-                        <i class="fa-solid fa-trash"></i>
-                     </button>
-                  </div>
-               </td>
-            </tr>
-            `
+          (product, index) => `
+            <tr data-id="${product.id}">
+              <td>${index + 1}</td>
+              <td class="cell-img"><img src="${product.imageURL}" alt="${
+            product.name
+          }" style="width:60px;height:60px;object-fit:cover;border-radius:8px;"></td>
+              <td class="cell-name">${product.name}</td>
+              <td class="cell-price">${product.price} RON</td>
+              <td>
+                <div class="actions">
+                  <button class="btn edit" data-action="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button class="btn delete" data-action="delete"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>`
         )
         .join("");
-    });
+    })
+    .catch((err) => console.error("Eroare la încărcarea produselor:", err));
 }
 
-addOrEditBtn.addEventListener("click", addOrEditNewProduct);
-
-function addOrEditNewProduct(e) {
+// ========== ADD / EDIT PRODUCT ==========
+addOrEditBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const name = nameInput.value;
-  const price = priceInput.value;
-  const imageURL = imageURLInput.value;
-  const description = descriptionInput.value;
 
   const newProduct = {
-    name: name,
-    price: price,
-    imageURL: imageURL,
-    details: description,
+    name: nameInput.value.trim(),
+    price: parseFloat(priceInput.value),
+    imageURL: imageURLInput.value.trim(),
+    details: descriptionInput.value.trim(),
   };
 
-  const method = isEditMode ? "PUT" : "POST";
-  const newUrl = isEditMode ? `${URL}/${productId}` : URL;
+  if (!newProduct.name || !newProduct.imageURL || isNaN(newProduct.price)) {
+    alert("Completează toate câmpurile corect!");
+    return;
+  }
 
-  fetch(newUrl, {
+  const method = isEditMode ? "PUT" : "POST";
+  const apiUrl = isEditMode ? `${URL}/${productId}` : URL;
+
+  fetch(apiUrl, {
     method: method,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newProduct),
-  }).then((response) => {
-    renderTable();
-    resetForm();
-  });
-}
+  })
+    .then((res) => res.json())
+    .then(() => {
+      renderTable();
+      resetForm();
+    })
+    .catch((err) => console.error("Eroare la salvare:", err));
+});
 
+// ========== RESET FORM ==========
 function resetForm() {
   nameInput.value = "";
   priceInput.value = "";
   imageURLInput.value = "";
   descriptionInput.value = "";
-
-  if (isEditMode) {
-    isEditMode = false;
-    addOrEditBtn.innerHTML = "Add product";
-  }
+  addOrEditBtn.textContent = "Add product";
+  isEditMode = false;
+  productId = null;
 }
 
-tableBody.addEventListener("click", handleActions);
+// ========== HANDLE EDIT / DELETE ==========
+tableBody.addEventListener("click", (e) => {
+  const actionBtn = e.target.closest("button");
+  if (!actionBtn) return;
 
-function handleActions(e) {
-  const clickedElement = e.target;
-  if (clickedElement.parentElement.classList.contains("edit")) {
-    productId = getTableRow(clickedElement).dataset.id;
-    fetch(`${URL}/${productId}`)
-      .then((response) => response.json())
+  const action = actionBtn.dataset.action;
+  const row = actionBtn.closest("tr");
+  const id = row.dataset.id;
+
+  if (action === "edit") {
+    fetch(`${URL}/${id}`)
+      .then((res) => res.json())
       .then((product) => {
-        console.log(product);
         nameInput.value = product.name;
         priceInput.value = product.price;
         imageURLInput.value = product.imageURL;
-        descriptionInput.value = product.details;
-      });
-    isEditMode = true;
-    console.log(addOrEditBtn, isEditMode);
-    addOrEditBtn.innerHTML = "Save";
-  } else if (clickedElement.parentElement.classList.contains("delete")) {
-    productId = getTableRow(clickedElement).dataset.id;
-    fetch(`${URL}/${productId}`, {
-      method: "DELETE",
-    }).then((response) => renderTable());
+        descriptionInput.value = product.details || "";
+        addOrEditBtn.textContent = "Save";
+        isEditMode = true;
+        productId = id;
+      })
+      .catch((err) => console.error("Eroare la editare:", err));
   }
-}
 
-function getTableRow(editIcon) {
-  return editIcon.parentElement.parentElement.parentElement.parentElement;
-}
-
-// buton de add product, se transform in add or edit si schimbam id-ul
-// cream o variabila de mod edit in care stocam true daca editam sau false daca adaugam(default value)
-// in momentul in care punem in input datele dintr-un produs care urmeaza sa fie editat, atunci variabila de edit mode se duce la true si i se schimba continutul din add product in save
-// metodele si numele de variabile pentru addNewProduct se transorma in ceva care se duca cu gandul ca si editam, exemplu: addOrEditBtn
-// la metoda care facea post trebuie sa adaugam o variabila method care va fi fie POST fie PUT in functie de valoarea lui isEditMode folosind ternary operator.
+  if (action === "delete") {
+    if (confirm("Ești sigur că vrei să ștergi acest produs?")) {
+      fetch(`${URL}/${id}`, { method: "DELETE" })
+        .then(() => renderTable())
+        .catch((err) => console.error("Eroare la ștergere:", err));
+    }
+  }
+});

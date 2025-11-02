@@ -1,71 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin</title>
+    <title>Admin - BioCosmetic</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
   <body>
-    <nav class="navbar">
-      <a class="logo" href="index.html">
-        <span class="logo-letter">
-          </i>BioCosmetic
-        </span>
-      </a>
+    <div class="navbar">
+      <a href="index.html" class="logo">BioCosmetic</a>
       <div class="nav-actions">
-        <a class="cart-link" href="cart.html">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span>Cart</span>
-          <div class="badge" id="cart-count">0</div>
-        </a>
-
-        <a href="admin.html">
-          <i class="fa-solid fa-user-gear"></i>
-          <span>Admin</span>
-        </a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="admin.html"><i class="fa-solid fa-user-gear"></i> Admin</a>
       </div>
-    </nav>
+    </div>
+
     <div class="admin-container">
       <form id="add-form" class="form-row">
         <input type="text" id="name" placeholder="Nume produs" required />
         <input
           type="number"
           id="price"
-          placeholder="Pret (ex: 12.5)"
+          placeholder="Preț (ex: 12.5)"
           step="0.01"
           required
         />
         <input type="text" id="imageURL" placeholder="URL imagine" required />
         <textarea
           id="description"
-          placeholder="Adauda descriera produsului"
+          placeholder="Adaugă descrierea produsului"
+          required
         ></textarea>
-        <button id="add-or-edit-btn">Adauga</button>
+        <button id="add-or-edit-btn" type="submit">Add product</button>
       </form>
 
-      <div id="table-container">
-        <table id="products-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Imagine</th>
-              <th>Nume</th>
-              <th>Pret</th>
-              <th>Actiuni</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <table id="products-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Imagine</th>
+            <th>Nume</th>
+            <th>Preț</th>
+            <th>Acțiuni</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
-    <script src="admins.js"></script>
+
+    <script src="admin.js"></script>
   </body>
 </html>

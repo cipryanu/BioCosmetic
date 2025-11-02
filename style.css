@@ -93,6 +93,16 @@ body {
   opacity: 0.9;
 }
 
+.admin-container {
+  padding: 50px;
+  padding-top: 120px;
+}
+
+.details-container {
+  padding: 50px;
+  padding-top: 120px;
+}
+
 .details-btn {
   background-color: var(--red);
 }
@@ -573,5 +583,254 @@ body {
   .total-price-container h2,
   .total-price-container span {
     font-size: 16px;
+  }
+}
+
+/* === CART PAGE === */
+
+.cart-container {
+  max-width: 1000px;
+  margin: 80px auto;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+#cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#cart-table th,
+#cart-table td {
+  padding: 12px 10px;
+  text-align: center;
+}
+
+#cart-table th {
+  background-color: #4d724e;
+  font-weight: bold;
+  color: white;
+}
+
+#cart-table td img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+#cart-table td a {
+  color: #e6b17e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#cart-table td a:hover {
+  text-decoration: underline;
+}
+
+/* controale cantitate */
+.qty-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-controls button {
+  background: #e6b17e;
+  color: black;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.qty-controls button:hover {
+  background: #ffcd9b;
+}
+
+/* buton remove */
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: #e57373;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #ff9b9b;
+}
+
+/* total general */
+.total-container {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #d4ed91;
+}
+
+/* mesaj coș gol */
+.empty-cart {
+  text-align: center;
+  color: #ccc;
+  font-size: 1.2rem;
+  margin-top: 50px;
+}
+
+/* buton pentru golirea completă a coșului (dacă îl adaugi mai târziu) */
+.clear-cart-btn {
+  background: #e57373;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background 0.3s ease;
+}
+
+.clear-cart-btn:hover {
+  background: #ff9b9b;
+}
+
+/* === NAVBAR FIXED TO TOP === */
+body {
+  margin: 0; /* elimină spațiul implicit */
+  padding: 0;
+}
+
+.navbar {
+  position: fixed; /* navbarul rămâne lipit de sus */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* rămâne deasupra conținutului */
+  background-color: #a7d99b;
+  justify-content: space-around;
+  display: flex;
+  padding-right: 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* opțional, pentru un efect vizual plăcut */
+}
+
+/* pentru conținutul de sub navbar (ex: .cart-container, .details-container etc.) */
+.cart-container,
+.details-container {
+  margin-top: 100px; /* ajustează în funcție de înălțimea reală a navbarului */
+}
+
+/* --- Stiluri pentru Pagina de Detalii (details.html) --- */
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: white; /* Asigură textul alb pe fundalul întunecat (presupus) */
+}
+
+/* Stilul pentru cardul de produs (injectat de JS in #product-details) */
+/* Atentie: in codul JS am folosit un ID, dar si clasa details-card este utila pentru styling */
+#product-details {
+  /* Setări de bază pentru a aranja imaginea și informațiile */
+  display: flex;
+  gap: 40px;
+  max-width: 900px;
+  width: 100%;
+
+  /* Stil vizual al cardului */
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.details-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.details-info {
+  flex: 1; /* Permite secțiunii info să ocupe spațiul rămas */
+}
+
+.details-info h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.details-info p {
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.details-info .price {
+  font-size: 1.4rem;
+  color: #d4ed91; /* Culoare distinctivă pentru preț */
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Stilul pentru butonul Adaugă în Coș */
+#add-to-cart {
+  background: #e6b17e;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px; /* Adaugă spațiu deasupra butonului */
+}
+
+#add-to-cart:hover {
+  background: #ffcd9b;
+}
+
+/* --- Stiluri pentru Notificarea Toast --- */
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #e6b17e;
+  color: #000;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Media Queries (Opțional, pentru responsive design) --- */
+@media (max-width: 768px) {
+  #product-details {
+    flex-direction: column; /* Stivuiește imaginea și info pe mobil */
+    gap: 20px;
+  }
+  .details-card img {
+    width: 100%;
+    height: auto;
   }
 }
