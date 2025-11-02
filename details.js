@@ -4,23 +4,6 @@ const BASE_URL = "https://69030bc3d0f10a340b225a62.mockapi.io/products";
 
 document.addEventListener("DOMContentLoaded", displayProductDetails);
 
-// Adăugați (sau asigurați-vă că este inclusă) funcția de actualizare a contorului
-// Aceasta ar trebui să fie definită într-un fișier global sau în cart.js și inclusă aici.
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || {};
-  let totalItems = 0;
-  const cartItems = Object.values(cart);
-
-  cartItems.forEach((item) => {
-    totalItems += item.quantity;
-  });
-
-  const cartCountElement = document.querySelector(".cart-count");
-  if (cartCountElement) {
-    cartCountElement.textContent = totalItems > 0 ? `(${totalItems})` : "";
-  }
-}
-
 /**
  * Functia principala pentru a prelua si afisa un singur produs pe baza ID-ului din URL.
  */
@@ -50,7 +33,10 @@ function displayProductDetails() {
       return response.json();
     })
     .then((product) => {
-      // 4. Randarea detaliilor
+      // 4. Debug: log product to console to inspect available fields
+      console.log("[details] fetched product:", product);
+
+      // 5. Randarea detaliilor
       renderProduct(product, detailsContainer);
 
       // 5. Atasarea event listener-ului pe butonul nou creat
@@ -70,23 +56,32 @@ function displayProductDetails() {
  * ATENȚIE: Am folosit proprietățile din MockAPI (name, price, imageURL, description)
  */
 function renderProduct(product, container) {
+  // Try multiple common field names for description (in case API uses a different key)
+  const description =
+    product.description ||
+    product.desc ||
+    product.details ||
+    product.longDescription ||
+    "Fără descriere detaliată.";
+
+  // Ensure image URL exists
+  const imgSrc = product.imageURL || product.image || "";
+
   container.innerHTML = `
-        <img src="${product.imageURL}" alt="${product.name}" />
-        <div class="details-info">
-            <h2>${product.name}</h2>
-            <div class="price">${product.price} LEI</div>
-            
-            <p class="description">
-                ${product.description || "Fără descriere detaliată."}
-            </p>
-            
-            <button 
-                id="add-to-cart"
-            >
-                Adaugă în Coș
-            </button>
-        </div>
-    `;
+    <div class="details-card">
+      <img src="${imgSrc}" alt="${product.name || "Product image"}" />
+      <div class="details-info">
+        <h2>${product.name || "Unnamed product"}</h2>
+        <div class="price">${
+          product.price ? product.price + " LEI" : "Preț indisponibil"
+        }</div>
+        <p class="description">${description}</p>
+          <div class="actions">
+            <button id="add-to-cart">Adaugă în Coș</button>
+          </div>
+      </div>
+    </div>
+  `;
 }
 
 /**

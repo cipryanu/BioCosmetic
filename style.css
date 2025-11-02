@@ -743,45 +743,64 @@ body {
 /* Stilul pentru cardul de produs (injectat de JS in #product-details) */
 /* Atentie: in codul JS am folosit un ID, dar si clasa details-card este utila pentru styling */
 #product-details {
-  /* Setări de bază pentru a aranja imaginea și informațiile */
-  display: flex;
-  gap: 40px;
-  max-width: 900px;
+  /* Container for injected product card */
+  max-width: 1100px;
   width: 100%;
+  margin: 0 auto;
+}
 
-  /* Stil vizual al cardului */
-  background: rgba(0, 0, 0, 0.25);
+/* card that holds image (left) and info (right) */
+.details-card {
+  display: flex;
+  gap: 28px;
+  background: rgba(0, 0, 0, 0.18);
   border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 22px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  align-items: stretch;
 }
 
 .details-card img {
-  width: 120px;
-  height: 120px;
+  flex: 0 0 45%;
+  max-width: 520px;
+  width: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
 }
 
 .details-info {
   flex: 1; /* Permite secțiunii info să ocupe spațiul rămas */
+  display: flex;
+  flex-direction: column;
 }
 
 .details-info h2 {
   margin-top: 0;
   color: #fff;
+  font-size: 1.6rem;
 }
 
 .details-info p {
-  line-height: 1.5;
-  margin: 10px 0;
+  line-height: 1.6;
+  margin: 12px 0;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .details-info .price {
   font-size: 1.4rem;
   color: #d4ed91; /* Culoare distinctivă pentru preț */
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+/* actions container will stick to bottom of the column */
+.actions {
+  margin-top: auto;
+}
+.actions #add-to-cart {
+  padding: 12px 22px;
 }
 
 /* Stilul pentru butonul Adaugă în Coș */
@@ -824,13 +843,69 @@ body {
 }
 
 /* --- Media Queries (Opțional, pentru responsive design) --- */
-@media (max-width: 768px) {
-  #product-details {
-    flex-direction: column; /* Stivuiește imaginea și info pe mobil */
+
+/* Tablet / small desktop */
+@media (max-width: 1024px) {
+  .details-card {
     gap: 20px;
   }
   .details-card img {
+    flex: 0 0 40%;
+    max-width: 420px;
+  }
+  .details-info h2 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile / tablet portrait */
+@media (max-width: 768px) {
+  .details-card {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .details-card img {
+    flex: none;
     width: 100%;
     height: auto;
+    border-radius: 10px;
+  }
+
+  .details-info {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .actions #add-to-cart {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .details-card {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .details-info h2 {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  .details-info p {
+    font-size: 0.95rem;
+  }
+
+  .actions #add-to-cart {
+    padding: 10px 16px;
   }
 }

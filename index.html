@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>BioCosmetic</title>
-		<link rel="stylesheet" href="style.css" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-			integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer"
-		/>
-	</head>
-	<body>
-		<nav class="navbar">
-			<a class="logo" href="index.html">
-				<span class="logo-letter">
-					</i>BioCosmetic
-				</span>
-			</a>
-			<div class="nav-actions">
-				<a class="cart-link" href="cart.html">
-					<i class="fa-solid fa-cart-shopping"></i>
-					<span>Cart</span>
-					<div class="badge" id="cart-count">0</div>
-				</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioCosmetic</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="index.html">
+        <span class="logo-letter">BioCosmetic</span>
+      </a>
+      <div class="nav-actions">
+        <a class="cart-link" href="cart.html">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Cart</span>
+          <div class="badge" id="cart-count">0</div>
+        </a>
+        <a href="admin.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Admin</span>
+        </a>
+      </div>
+    </nav>
 
-				<a href="admin.html">
-					<i class="fa-solid fa-user-gear"></i>
-					<span>Admin</span>
-				</a>
-			</div>
-		</nav>
-
-		<div class="products-container"></div>
-		<script src="app.js"></script>
-	</body>
+    <div class="products-container"></div>
+    <!-- Load cart utilities first so pages can call updateCartCount() -->
+    <script src="cart.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

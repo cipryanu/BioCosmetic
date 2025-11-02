@@ -11,13 +11,23 @@
     />
   </head>
   <body>
-    <div class="navbar">
-      <a href="index.html" class="logo">BioCosmetic</a>
+    <nav class="navbar">
+      <a class="logo" href="index.html">
+        <span class="logo-letter">BioCosmetic</span>
+      </a>
       <div class="nav-actions">
-        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Coș</a>
-        <a href="admin.html"><i class="fa-solid fa-user-gear"></i> Admin</a>
+        <a class="cart-link" href="cart.html">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Coș</span>
+          <div class="badge" id="cart-count">0</div>
+        </a>
+
+        <a href="admin.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Admin</span>
+        </a>
       </div>
-    </div>
+    </nav>
 
     <div class="cart-container">
       <table id="cart-table">

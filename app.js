@@ -16,19 +16,19 @@ function displayProducts() {
         .map(
           (product) => `
          <div class="product-card">
-				<img
-					src=${product.imageURL}
-					alt="Product image"
-				/>
-				<div class="product-info">
-					<h3>${product.name}</h3>
-					<div class="price">${product.price} LEI</div>
-					<div class="buttons">
-						<a href="details.html?id=${product.id}" class="details-btn">Details</a>
-						<button data-id=${product.id} class="cart-btn">Add to Cart</button>
-					</div>
-				</div>
-			</div>   
+                <img
+                    src="${product.imageURL}"
+                    alt="Product image"
+                />
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <div class="price">${product.price} LEI</div>
+                    <div class="buttons">
+                        <a href="details.html?id=${product.id}" class="details-btn">Detalii</a>
+                        <button data-id="${product.id}" class="cart-btn">Adaugă în Coș</button>
+                    </div>
+                </div>
+            </div>   
       `
         )
         .join("");
@@ -48,13 +48,15 @@ function displayProducts() {
           } else {
             cart[productId] = {
               quantity: 1,
-              price: product.price,
+              price: parseFloat(product.price) || 0,
               image: product.imageURL,
               name: product.name,
+              id: product.id,
             };
           }
 
           localStorage.setItem("cart", JSON.stringify(cart));
+          if (typeof updateCartCount === "function") updateCartCount();
         });
       });
     });
