@@ -33,17 +33,20 @@
     </nav>
 
     <div class="products-container"></div>
-      <div class="pagination">
-        <button id="prev-page" class="page-btn">
-          <i class="fa-solid fa-chevron-left"></i> Înapoi
-        </button>
-        <div id="page-info">Pagina <span id="current-page">1</span> din <span id="total-pages">1</span></div>
-        <button id="next-page" class="page-btn">
-          Înainte <i class="fa-solid fa-chevron-right"></i>
-        </button>
+    <div class="pagination">
+      <button id="prev-page" class="page-btn">
+        <i class="fa-solid fa-chevron-left"></i> Înapoi
+      </button>
+      <div id="page-info">
+        Pagina <span id="current-page">1</span> din
+        <span id="total-pages">1</span>
       </div>
-      <!-- Load cart utilities first so pages can call updateCartCount() -->
-      <script src="cart.js"></script>
-      <script src="app.js"></script>
-    </body>
+      <button id="next-page" class="page-btn">
+        Înainte <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+    <!-- Load cart utilities first so pages can call updateCartCount() -->
+    <script src="cart.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

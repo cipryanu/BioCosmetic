@@ -77,6 +77,12 @@ function renderProduct(product, container) {
         }</div>
         <p class="description">${description}</p>
           <div class="actions">
+            <label class="quantity-label">CANTITATE</label>
+            <div class="quantity-selector">
+              <button class="qty-btn" id="decrease-qty">-</button>
+              <span id="quantity-display">1</span>
+              <button class="qty-btn" id="increase-qty">+</button>
+            </div>
             <button id="add-to-cart">Adaugă în Coș</button>
           </div>
       </div>
@@ -89,6 +95,28 @@ function renderProduct(product, container) {
  */
 function attachAddToCartListener(product) {
   const button = document.getElementById("add-to-cart");
+  const decreaseBtn = document.getElementById("decrease-qty");
+  const increaseBtn = document.getElementById("increase-qty");
+  const quantityDisplay = document.getElementById("quantity-display");
+
+  let selectedQuantity = 1;
+
+  // Controale pentru cantitate
+  if (decreaseBtn) {
+    decreaseBtn.addEventListener("click", () => {
+      if (selectedQuantity > 1) {
+        selectedQuantity--;
+        quantityDisplay.textContent = selectedQuantity;
+      }
+    });
+  }
+
+  if (increaseBtn) {
+    increaseBtn.addEventListener("click", () => {
+      selectedQuantity++;
+      quantityDisplay.textContent = selectedQuantity;
+    });
+  }
 
   if (button) {
     button.addEventListener("click", () => {
@@ -96,28 +124,53 @@ function attachAddToCartListener(product) {
       let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
       if (cart[productId]) {
-        cart[productId].quantity++;
+        cart[productId].quantity += selectedQuantity;
       } else {
         cart[productId] = {
-          quantity: 1,
+          quantity: selectedQuantity,
           price: parseFloat(product.price),
           image: product.imageURL,
           name: product.name,
-          id: product.id, // ID-ul este esențial pentru funcționalitatea din cart.js
+          id: product.id,
         };
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
 
-      // 🟢 CORECTIE: Apelarea funcției de actualizare a contorului
+      // Actualizare contor
       if (typeof updateCartCount === "function") {
         updateCartCount();
       }
 
-      // Afișează notificare (dacă funcția showToast este definită)
-      // if (typeof showToast === 'function') {
-      //     showToast(`"${product.name}" a fost adăugat în coș!`);
-      // }
+      // Afișează notificare
+      showToast(product, selectedQuantity);
+
+      // Resetează cantitatea la 1 după adăugare
+      selectedQuantity = 1;
+      quantityDisplay.textContent = selectedQuantity;
     });
   }
+}
+
+/**
+ * Afișează o notificare toast cu imaginea produsului și detalii.
+ */
+function showToast(product, quantity) {
+  const toast = document.getElementById("toast");
+  
+  toast.innerHTML = `
+    <img src="${product.imageURL}" alt="${product.name}" class="toast-image" />
+    <div class="toast-content">
+      <strong>${product.name}</strong>
+      <span>${quantity} x ${product.price} LEI</span>
+      <span class="toast-message">Adăugat în coș ✓</span>
+    </div>
+  `;
+  
+  toast.classList.add("show");
+
+  // Ascunde notificarea după 3 secunde
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
 }

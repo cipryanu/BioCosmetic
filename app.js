@@ -85,7 +85,10 @@ function displayProducts(page) {
 }
 
 function setupPagination() {
-  const totalPages = Math.max(1, Math.ceil(allProducts.length / productsPerPage));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(allProducts.length / productsPerPage)
+  );
   const totalPagesEl = document.getElementById("total-pages");
   if (totalPagesEl) totalPagesEl.textContent = totalPages;
 
@@ -118,7 +121,10 @@ function setupPagination() {
 }
 
 function updatePagination() {
-  const totalPages = Math.max(1, Math.ceil(allProducts.length / productsPerPage));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(allProducts.length / productsPerPage)
+  );
   const currentEl = document.getElementById("current-page");
   const prevBtn = document.getElementById("prev-page");
   const nextBtn = document.getElementById("next-page");
@@ -127,4 +133,3 @@ function updatePagination() {
   if (prevBtn) prevBtn.disabled = currentPage === 1;
   if (nextBtn) nextBtn.disabled = currentPage === totalPages;
 }
-
