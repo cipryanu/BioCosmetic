@@ -78,7 +78,7 @@ function resetForm() {
   priceInput.value = "";
   imageURLInput.value = "";
   descriptionInput.value = "";
-  addOrEditBtn.textContent = "Add product";
+  addOrEditBtn.textContent = "Adaugă produs";
   isEditMode = false;
   productId = null;
 }
@@ -100,7 +100,7 @@ tableBody.addEventListener("click", (e) => {
         priceInput.value = product.price;
         imageURLInput.value = product.imageURL;
         descriptionInput.value = product.details || "";
-        addOrEditBtn.textContent = "Save";
+        addOrEditBtn.textContent = "Salvează";
         isEditMode = true;
         productId = id;
       })
