@@ -78,7 +78,9 @@ function loadCart() {
 
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><img src="${item.image}" alt="${item.name}" class="cart-product-image" /></td>
+      <td><img src="${item.image}" alt="${
+      item.name
+    }" class="cart-product-image" /></td>
       <td><a href="details.html?id=${productId}">${item.name}</a></td>
       <td>${price.toFixed(2)} LEI</td>
       <td>
